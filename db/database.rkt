@@ -29,7 +29,7 @@
          (prefix (a-d db table fixed-size-slots table) tbl:)
          (prefix (a-d db table fixed-size-slots schema) scma:)
          (prefix (a-d db index b-tree b-tree) btree:)
-         (prefix (a-d dictionary unordered external-chaining) dict:)
+         (prefix (a-d dictionary ordered avl) dict:)
          (rnrs base)
          (rnrs control)
          (rnrs lists)
@@ -181,6 +181,7 @@
    (define scma (tbl:schema t1))
    (define type (scma:type scma a1))
    (define eqls (vector-ref equals type))
+   (define <<? (vector-ref smaller type))
    
    (define (foreach lst proc) ; hulpfunctie
      (let loop ((ls lst))
@@ -192,6 +193,7 @@
      (append tpl1 tpl2))
    
    (define (add-to-result tpl joins)
+     (display joins) (newline) (newline)
      (foreach joins
               (lambda (tpl2)
                 (set! result (cons (merge-tpls tpl tpl2) result)))))
@@ -207,7 +209,7 @@
    
    (define (outer)
      (let*
-         ((dict (dict:new eqls (* (scma:capacity (tbl:schema t1)) *m*)))
+         ((dict (dict:new eqls <<?))
           (has-next-t1 (tbl:for-each-of-n-next-nodes t1 (- *m* 1) ; voor t1, laadt telkens slechts M-1 node/block in geheugen
                                                      (lambda (tple rcid) ; voor elke tple, voeg toe in dictionary met 
                                                        (dict:insert! dict (list-ref tple a1) tple))))) 

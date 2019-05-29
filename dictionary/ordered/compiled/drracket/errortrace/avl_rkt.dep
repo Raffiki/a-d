@@ -1,0 +1,1 @@
+("7.0" ("3532d1ba18ae64cec957504918f375b3d714282e" . "d24e49816f9cad03fa42997e6cd530faecd0a468") (collects #"a-d" #"tree" #"avl-tree.rkt") (collects #"errortrace" #"errortrace-key.rkt") (collects #"r6rs" #"lang" #"reader.rkt") (collects #"r6rs" #"main.rkt") (collects #"r6rs" #"private" #"prelims.rkt") (collects #"rnrs" #"base-6.rkt") (collects #"srfi" #"%3a9.rkt"))
